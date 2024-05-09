@@ -1,0 +1,17 @@
+.signup {
+  padding: 120px 0 120px;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .auth-image {
+    margin-right: 26px;
+    margin-top: 3px;
+
+    img {
+      vertical-align: bottom;
+    }
+  }
+}

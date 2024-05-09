@@ -9,13 +9,15 @@ import {FooterComponent} from './shared/layout/footer/footer.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatMenuModule} from "@angular/material/menu";
 import {MatDialogModule} from "@angular/material/dialog";
+import {MainComponent} from './views/main/main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    MainComponent,
   ],
   imports: [
     BrowserModule,

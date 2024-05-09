@@ -1,0 +1,17 @@
+.login {
+  padding: 120px 0 92px;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .auth-image {
+    margin-right: 26px;
+    margin-top: -14px;
+
+    img {
+      vertical-align: bottom;
+    }
+  }
+}

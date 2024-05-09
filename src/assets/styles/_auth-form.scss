@@ -1,0 +1,71 @@
+@import "variables";
+
+.auth-form {
+  .auth-title {
+    font-family: 'Lora', sans-serif;
+    font-weight: 400;
+    font-size: 36px;
+    color: $light-blue-color;
+    margin-bottom: 40px;
+  }
+
+  .auth-inputs {
+    max-width: 422px;
+
+    .auth-input {
+      margin-top: 5px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      input {
+        width: 100%;
+      }
+    }
+
+    .auth-checkbox {
+      display: flex;
+      align-items: flex-start;
+      margin-top: 10px;
+
+      input {
+        margin: 2px 0 5px;
+      }
+
+      label {
+        font-size: 14px;
+        line-height: 130%;
+        color: $dark-blue-color;
+        margin-left: 10px;
+
+        a {
+          text-decoration: underline;
+          text-decoration-skip-ink: none;
+          color: $light-blue-color;
+        }
+      }
+    }
+
+    .auth-btn {
+      margin-top: 40px;
+
+      .btn {
+        width: 100%;
+      }
+    }
+
+    .auth-link {
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 130%;
+      color: #1e1a2b;
+
+      a {
+        text-decoration: none;
+        color: $light-blue-color;
+        margin-left: 7px;
+      }
+    }
+  }
+}
