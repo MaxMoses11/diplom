@@ -1,0 +1,70 @@
+@import "../../../../assets/styles/variables";
+
+.header {
+  padding: 40px 0 40px;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+
+    .header-left {
+      display: flex;
+      align-items: center;
+
+      .logo {
+        text-decoration: none;
+        height: 47px;
+        margin-right: 100px;
+      }
+
+      .menu ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 30px;
+
+        li a {
+          text-decoration: none;
+          font-weight: 500;
+          font-size: 16px;
+          color: $dark-blue-color;
+        }
+      }
+    }
+
+    .header-right {
+      width: 369px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .phone-link {
+        a {
+          text-decoration: none;
+          color: $light-blue-color;
+          font-weight: 500;
+          font-size: 16px;
+        }
+      }
+
+      .user {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        .user-icon {
+          height: 24px;
+        }
+
+        .user-text {
+          margin-left: 7px;
+          font-weight: 500;
+          color: $dark-blue-color;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}

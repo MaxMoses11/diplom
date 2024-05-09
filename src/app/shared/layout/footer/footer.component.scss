@@ -1,0 +1,83 @@
+@import "../../../../assets/styles/variables";
+
+.footer {
+  padding: 40px 0 54px;
+  background: #b9d5fd;
+
+  .container {
+    .footer-menu {
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+
+      .logo {
+        text-decoration: none;
+        height: 47px;
+        margin-right: 40px;
+      }
+
+      .menu ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        li a {
+          text-decoration: none;
+          font-weight: 400;
+          font-size: 16px;
+          color: $dark-blue-color;
+        }
+      }
+    }
+
+    .footer-contacts {
+      display: flex;
+      gap: 60px;
+      margin-bottom: 6px;
+
+      .footer-contact {
+        max-width: 253px;
+        display: flex;
+        flex-direction: column;
+
+        .footer-contact-head {
+          font-weight: 500;
+          font-size: 16px;
+          color: $light-blue-color;
+        }
+
+        .footer-contact-info {
+          text-decoration: none;
+          margin-top: 10px;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 130%;
+          color: $dark-blue-color;
+
+          &.email {
+            font-size: 14px;
+          }
+        }
+
+        .footer-contact-action {
+          margin-top: 10px;
+        }
+
+        .footer-contact-links {
+          margin-top: 15px;
+          display: flex;
+          gap: 12px;
+        }
+      }
+    }
+
+    .footer-copyright {
+      font-weight: 400;
+      font-size: 16px;
+      color: $light-blue-color;
+    }
+  }
+}
