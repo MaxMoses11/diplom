@@ -22,6 +22,13 @@
       input {
         width: 100%;
       }
+
+      label {
+        display: inline-block;
+        color: red;
+        margin-top: 5px;
+        margin-bottom: 10px;
+      }
     }
 
     .auth-checkbox {
@@ -38,12 +45,6 @@
         line-height: 130%;
         color: $dark-blue-color;
         margin-left: 10px;
-
-        a {
-          text-decoration: underline;
-          text-decoration-skip-ink: none;
-          color: $light-blue-color;
-        }
       }
     }
 
@@ -52,6 +53,11 @@
 
       .btn {
         width: 100%;
+
+        &:disabled {
+          cursor: not-allowed;
+          background: #a8aba7;
+        }
       }
     }
 

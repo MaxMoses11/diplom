@@ -1,9 +1,36 @@
+@import "../../../../assets/styles/variables";
+
 .signup {
   padding: 120px 0 120px;
 
   .container {
     display: flex;
     justify-content: space-between;
+  }
+
+  .auth-form {
+    .auth-checkbox {
+      flex-direction: column;
+
+      .auth-checkbox-input {
+        display: flex;
+        align-items: flex-start;
+
+        label {
+          a {
+            text-decoration: underline;
+            text-decoration-skip-ink: none;
+            color: $light-blue-color;
+          }
+        }
+      }
+
+      .error-label {
+        font-size: 14px;
+        margin-top: 5px;
+        color: red;
+      }
+    }
   }
 
   .auth-image {

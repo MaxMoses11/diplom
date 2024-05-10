@@ -1,20 +1,34 @@
-<div class="login">
+<section class="login"  [formGroup]="loginForm">
   <div class="container">
     <div class="auth-form">
       <div class="auth-title">Войти в личный кабинет</div>
       <div class="auth-inputs">
         <div class="auth-input">
-          <input type="email" placeholder="Электронная почта">
+          <input type="email" placeholder="Электронная почта"
+                 [ngStyle]="{'border-color': loginForm.get('email')?.invalid
+                 && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched) ? 'red' : ''}"
+                 formControlName="email">
+          <label *ngIf="loginForm.get('email')?.invalid
+                  && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
+              Введите корректный E-Mail
+          </label>
         </div>
         <div class="auth-input">
-          <input type="password" placeholder="Пароль">
+          <input type="password" placeholder="Пароль"
+                 [ngStyle]="{'border-color': loginForm.get('password')?.invalid
+                 && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched) ? 'red' : ''}"
+                 formControlName="password">
+          <label *ngIf="loginForm.get('password')?.invalid
+                  && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+              Введите верный пароль
+          </label>
         </div>
         <div class="auth-checkbox">
-          <input type="checkbox" id="remember">
+          <input type="checkbox" id="remember" formControlName="remember">
           <label for="remember">Запомнить меня</label>
         </div>
         <div class="auth-btn">
-          <button class="btn btn-big">Войти</button>
+          <button class="btn btn-big" [disabled]="loginForm.invalid" (click)="logIn()">Войти</button>
         </div>
         <div class="auth-link">
           Нет аккаунта?<a routerLink="/signup">Пройдите регистрацию</a>
@@ -25,4 +39,4 @@
       <img src="/assets/images/pages/login-image.png" alt="Login Image">
     </div>
   </div>
-</div>
+</section>
