@@ -61,7 +61,7 @@ export class HeaderComponent implements OnInit {
 
             const fullUserName = (value as UserInfoResponseType).name;
 
-            this.userName = fullUserName.split(' ')[1];
+            this.userName = fullUserName.split(' ')[0];
           }
         });
   }

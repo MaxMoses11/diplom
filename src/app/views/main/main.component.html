@@ -1,1 +1,60 @@
-<p>main works!</p>
+<section class="main">
+    <div class="container">
+        <div class="carousel-items">
+            <owl-carousel-o [options]="customOptions" #owlCar>
+                <ng-template carouselSlide *ngFor="let item of sliderInfoItems">
+                    <app-main-carousel-item [item]="item"></app-main-carousel-item>
+                </ng-template>
+
+<!--                <ng-template carouselSlide class="carousel-item">-->
+<!--                    <div class="carousel-item-info">-->
+<!--                        <div class="carousel-item-info-promo">Предложение месяца</div>-->
+<!--                        <div class="carousel-item-info-title">-->
+<!--                            Продвижение в Instagram для вашего бизнеса <span class='blue-text'>-15%</span>!-->
+<!--                        </div>-->
+<!--                        <div class="carousel-item-info-action">-->
+<!--                            <button class="btn btn-small">Подробнее</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="carousel-item-image">-->
+<!--                        <img src="/assets/images/pages/slider-item-img1.png" alt="Image">-->
+<!--                    </div>-->
+<!--                </ng-template>-->
+<!--                <ng-template carouselSlide class="carousel-item">-->
+<!--                    <div class="carousel-item-info">-->
+<!--                        <div class="carousel-item-info-promo">Акция</div>-->
+<!--                        <div class="carousel-item-info-title">-->
+<!--                            Нужен грамотный <span class='blue-text'>копирайтер</span>?-->
+<!--                        </div>-->
+<!--                        <div class="carousel-item-info-text">-->
+<!--                            Весь декабрь у нас действует акция на работу копирайтера.-->
+<!--                        </div>-->
+<!--                        <div class="carousel-item-info-action">-->
+<!--                            <button class="btn btn-small">Подробнее</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="carousel-item-image">-->
+<!--                        <img src="/assets/images/pages/slider-item-img2.png" alt="Image">-->
+<!--                    </div>-->
+<!--                </ng-template>-->
+<!--                <ng-template carouselSlide class="carousel-item">-->
+<!--                    <div class="carousel-item-info">-->
+<!--                        <div class="carousel-item-info-promo">Новость дня</div>-->
+<!--                        <div class="carousel-item-info-title">-->
+<!--                            <span class='blue-text'>6 место</span> в ТОП-10 SMM-агенств Москвы!-->
+<!--                        </div>-->
+<!--                        <div class="carousel-item-info-text">-->
+<!--                            Мы благодарим каждого, кто голосовал за нас!-->
+<!--                        </div>-->
+<!--                        <div class="carousel-item-info-action">-->
+<!--                            <button class="btn btn-small">Подробнее</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="carousel-item-image">-->
+<!--                        <img src="/assets/images/pages/slider-item-img3.png" alt="Image">-->
+<!--                    </div>-->
+<!--                </ng-template>-->
+            </owl-carousel-o>
+        </div>
+    </div>
+</section>

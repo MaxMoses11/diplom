@@ -1,0 +1,17 @@
+<div class="carousel-item">
+    <div class="carousel-item-info">
+        <div class="carousel-item-info-promo">{{item.promo}}</div>
+        <div class="carousel-item-info-title">
+           {{item.title}}
+        </div>
+        <div class="carousel-item-info-text" *ngIf="item.text">
+           {{item.text}}
+        </div>
+        <div class="carousel-item-info-action">
+            <button class="btn btn-small">Подробнее</button>
+        </div>
+    </div>
+    <div class="carousel-item-image">
+        <img src="/assets/images/pages/{{item.image}}" alt="Image">
+    </div>
+</div>
