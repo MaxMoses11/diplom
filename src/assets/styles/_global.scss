@@ -100,3 +100,35 @@ input {
     color: #a8aba7;
   }
 }
+
+.blue-text {
+  color: $light-blue-color;
+}
+
+.owl-theme {
+  position: relative;
+
+  .owl-dots {
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+
+    .owl-dot {
+      span {
+        background-color: transparent;
+        width: 10px;
+        height: 10px;
+        box-sizing: border-box;
+        border: 1px solid white;
+        margin: 0 10px;
+      }
+
+      &.active span, &:hover span {
+        background: white;
+      }
+
+    }
+  }
+}
+
+//.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span

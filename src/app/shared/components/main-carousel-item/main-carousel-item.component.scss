@@ -1,0 +1,58 @@
+@import "../../../../assets/styles/variables";
+
+.carousel-item {
+  position: relative;
+
+  .carousel-item-info {
+    position: relative;
+    z-index: 1;
+    width: 703px;
+    height: 500px;
+    box-sizing: border-box;
+    background-image: url("../../../../assets/images/pages/slider-item-bgd.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-left: 80px;
+    padding-right: 13px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .carousel-item-info-promo {
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: $light-blue-color;
+    }
+
+    .carousel-item-info-title {
+      font-family: "Lora", sans-serif;
+      font-weight: 400;
+      font-size: 50px;
+      line-height: 130%;
+      color: #fff;
+    }
+
+    .carousel-item-info-text {
+      width: 456px;
+      margin-top: 20px;
+      font-size: 24px;
+      line-height: 130%;
+      color: #fff;
+    }
+
+    .btn {
+      width: 163px;
+      padding: 15px 33px;
+    }
+  }
+
+  .carousel-item-image {
+    position: absolute;
+    z-index: 0;
+    right: 0;
+    top: 0;
+    width: 750px;
+  }
+}

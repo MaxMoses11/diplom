@@ -1,0 +1,289 @@
+@import "../../../assets/styles/mixins";
+@import "../../../assets/styles/variables";
+
+.main {
+  margin-bottom: 120px;
+
+  .carousel {
+    position: relative;
+
+    .carousel-items {
+      position: relative;
+      z-index: 1;
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: calc(50% - 16px);
+      z-index: 2;
+      cursor: pointer;
+
+      &.arrow-prev {
+        left: 10px;
+      }
+
+      &.arrow-next {
+        right: 10px;
+      }
+    }
+  }
+}
+
+.services {
+  margin-bottom: 120px;
+
+  .container {
+    .services-title {
+      @include head-lora-38;
+      margin-bottom: 40px;
+    }
+
+    .services-items {
+      display: flex;
+      gap: 26px;
+    }
+  }
+}
+
+.about {
+  margin-bottom: 120px;
+
+  .container {
+    display: flex;
+    gap: 68px;
+
+    .about-image {
+      border-radius: 5px;
+      height: 453px;
+    }
+
+    .about-info {
+      .about-info-title {
+        @include head-lora-38;
+        margin-bottom: 20px;
+      }
+
+      .about-info-text {
+        max-width: 633px;
+        font-size: 14px;
+        line-height: 130%;
+        color: #1e1a2b;
+        margin-bottom: 39px;
+
+        span {
+          font-weight: 500;
+        }
+      }
+
+      .about-info-advantages {
+        .about-info-advantages-title {
+          font-family: "Lora", sans-serif;
+          font-weight: 400;
+          font-size: 26px;
+          line-height: 130%;
+          color: $light-blue-color;
+          margin-bottom: 20px;
+        }
+
+        .about-info-advantages-items {
+          display: flex;
+          flex-wrap: wrap;
+          row-gap: 20px;
+          column-gap: 71px;
+
+          .about-info-advantages-item {
+            display: flex;
+            width: 316px;
+            height: 90px;
+            gap: 20px;
+
+            .about-info-advantages-item-number {
+              position: relative;
+              min-width: 40px;
+              height: 65px;
+              text-align: center;
+
+              span {
+                position: relative;
+                z-index: 1;
+                font-family: "Lora", sans-serif;
+                font-weight: 500;
+                font-size: 50px;
+                line-height: 130%;
+                color: $light-blue-color;
+              }
+
+              .number-ellipse {
+                position: absolute;
+                z-index: 0;
+                bottom: 5px;
+                width: 40px;
+                height: 40px;
+                border-radius: 100%;
+                background: #b9d5fd;
+              }
+            }
+
+            .about-info-advantages-item-text {
+              font-size: 14px;
+              line-height: 130%;
+              color: #1e1a2b;
+
+              span {
+                font-weight: 500;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.popular {
+  margin-bottom: 120px;
+
+  .popular-title {
+    @include head-lora-38;
+    margin-bottom: 40px;
+  }
+
+  .popular-articles {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .popular-link {
+    display: flex;
+    justify-content: end;
+
+    a {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 130%;
+      color: $light-blue-color;
+      text-decoration: none;
+    }
+  }
+}
+
+
+.reviews {
+  margin-bottom: 120px;
+
+  .reviews-title {
+    @include head-lora-38;
+    margin-bottom: 20px;
+  }
+
+  .reviews-carousel {
+    position: relative;
+
+    .reviews-carousel-items {
+      position: relative;
+      z-index: 1;
+
+      .review {
+        position: relative;
+        border: 2px solid $light-blue-color;
+        border-radius: 5px;
+        background: #fff;
+        padding: 30px;
+        height: 267px;
+        box-sizing: border-box;
+
+        .review-head {
+          display: flex;
+          align-items: center;
+          gap: 26px;
+          margin-bottom: 15px;
+
+          .review-head-image {
+            border-radius: 50%;
+            height: 60px;
+
+            img {
+              border-radius: 50%;
+            }
+          }
+
+          .review-head-name {
+            font-weight: 600;
+            font-size: 18px;
+            color: $light-blue-color;
+          }
+        }
+
+        .review-text {
+          font-size: 16px;
+          line-height: 140%;
+          color: $dark-blue-color;
+        }
+      }
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: calc(50% - 10px);
+      z-index: 2;
+      cursor: pointer;
+
+      &.arrow-prev {
+        left: -25px;
+      }
+
+      &.arrow-next {
+        right: -25px;
+      }
+    }
+  }
+}
+
+.contacts {
+  margin-bottom: 120px;
+
+  .container {
+    display: flex;
+    gap: 26px;
+
+    .contacts-info {
+      .contacts-info-title {
+        @include head-lora-38;
+        margin-bottom: 20px;
+      }
+
+      .contacts-info-items {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .contacts-info-item {
+          .contacts-info-item-name {
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 130%;
+            color: $light-blue-color;
+            margin-bottom: 10px;
+          }
+
+          .contacts-info-item-text,
+          .contacts-info-item-text a {
+            font-size: 14px;
+            line-height: 130%;
+            color: $dark-blue-color;
+            text-decoration: none;
+          }
+
+          .contacts-info-item-links {
+            display: flex;
+            gap: 20px;
+          }
+        }
+      }
+    }
+  }
+}

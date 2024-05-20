@@ -1,0 +1,15 @@
+<div class="service">
+  <div class="service-info">
+    <div class="service-image">
+      <img src="/assets/images/pages/{{service.image}}" alt="Image">
+    </div>
+    <div class="service-title">{{service.title}}</div>
+    <div class="service-text">{{service.text}}</div>
+  </div>
+  <div class="service-action">
+    <div class="service-action-price">{{service.price}}</div>
+    <div class="service-action-button">
+      <button class="btn btn-big" (click)="order(service.service)">Подробнее</button>
+    </div>
+  </div>
+</div>

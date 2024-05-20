@@ -1,0 +1,12 @@
+<div class="article" *ngIf="article" (click)="navigate()">
+  <div class="article-info">
+    <div class="article-image" style="background-image: url({{pathToImage + article.image}})">
+      <div class="article-image-tab">{{article.category}}</div>
+    </div>
+    <div class="article-title">{{article.title}}</div>
+    <div class="article-text">{{article.description}}</div>
+  </div>
+  <div class="article-action">
+    Читать дальше
+  </div>
+</div>

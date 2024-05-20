@@ -1,0 +1,50 @@
+@import "../../../../assets/styles/variables";
+
+.service {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
+  .service-info {
+    margin-bottom: 15px;
+
+    .service-image {
+      height: 291px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    .service-title {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 130%;
+      color: $light-blue-color;
+      margin-bottom: 10px;
+    }
+
+    .service-text {
+      font-size: 14px;
+      line-height: 130%;
+      color: $dark-blue-color;
+    }
+  }
+
+  .service-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .service-action-price {
+      font-weight: 600;
+      font-size: 20px;
+      color: $light-blue-color;
+    }
+
+    .service-action-button {
+      .btn {
+        padding: 15px 33px;
+      }
+    }
+  }
+}
