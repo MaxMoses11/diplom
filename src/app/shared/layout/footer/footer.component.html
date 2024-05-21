@@ -73,13 +73,36 @@
         <line x1="13.9236" y1="2.62978" x2="1.90277" y2="14.6506" stroke="#BEBEBE" stroke-linecap="round"/>
       </svg>
     </div>
-    <div class="popup-title">Бесплатная консультация</div>
-    <form class="popup-form">
-      <input type="text" placeholder="Имя">
-      <input type="text" placeholder="Номер телефона">
-      <button class="btn btn-big">
-        Заказать звонок
+    <div class="popup-with-form" *ngIf="!requestStatus">
+      <div class="popup-title">Закажите бесплатную консультацию!</div>
+      <form class="popup-form" [formGroup]="modalForm">
+        <input type="text" placeholder="Ваше имя"
+               [ngStyle]="{'border-color': modalForm.get('name')?.invalid
+             && (modalForm.get('name')?.dirty || modalForm.get('name')?.touched) ? 'red' : ''}"
+               formControlName="name">
+        <label *ngIf="modalForm.get('name')?.invalid
+                  && (modalForm.get('name')?.dirty || modalForm.get('name')?.touched)">
+          Заполните поле
+        </label>
+        <input type="text" placeholder="Ваш номер телефона"
+               [ngStyle]="{'border-color': modalForm.get('phone')?.invalid
+             && (modalForm.get('phone')?.dirty || modalForm.get('phone')?.touched) ? 'red' : ''}"
+               formControlName="phone">
+        <label *ngIf="modalForm.get('phone')?.invalid
+                  && (modalForm.get('phone')?.dirty || modalForm.get('phone')?.touched)">
+          Заполните поле
+        </label>
+        <button class="btn btn-big" (click)="makeRequest()">
+          Заказать консультацию
+        </button>
+      </form>
+    </div>
+    <div class="popup-success-request" *ngIf="requestStatus">
+      <div class="popup-title">Спасибо за вашу заявку!</div>
+      <div class="popup-text">Мы свяжемся с вами при первой же возможности.</div>
+      <button class="btn btn-small" (click)="closePopup()">
+        Окей
       </button>
-    </form>
+    </div>
   </div>
 </ng-template>
