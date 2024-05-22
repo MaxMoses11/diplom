@@ -40,7 +40,7 @@
   <div class="container">
     <div class="services-title">Услуги, которые мы предлагаем</div>
     <div class="services-items">
-      <app-main-services-item *ngFor="let service of servicesInfo" [service]="service"></app-main-services-item>
+      <app-main-services-item *ngFor="let service of servicesInfo" [service]="service" (orderRequest)="orderRequest($event)"></app-main-services-item>
     </div>
   </div>
 </section>
@@ -239,3 +239,52 @@
     </div>
   </div>
 </section>
+
+<ng-template #popup>
+  <div class="popup">
+    <div class="popup-close" (click)="closePopup()">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="1.93562" y1="2.64999" x2="13.9564" y2="14.6708" stroke="#BEBEBE" stroke-linecap="round"/>
+        <line x1="13.9236" y1="2.62978" x2="1.90277" y2="14.6506" stroke="#BEBEBE" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="popup-with-form" *ngIf="!requestStatus">
+      <div class="popup-title">Заявка на услугу</div>
+      <form class="popup-form" [formGroup]="modalForm">
+        <select formControlName="service" class="popup-select">
+          <option value="copy">Копирайтинг</option>
+          <option value="add">Реклама</option>
+          <option value="smm">Продвижение</option>
+          <option value="dev">Создание сайтов</option>
+        </select>
+        <input type="text" placeholder="Ваше имя"
+               [ngStyle]="{'border-color': modalForm.get('name')?.invalid
+             && (modalForm.get('name')?.dirty || modalForm.get('name')?.touched) ? 'red' : ''}"
+               formControlName="name">
+        <label *ngIf="modalForm.get('name')?.invalid
+                  && (modalForm.get('name')?.dirty || modalForm.get('name')?.touched)">
+          Заполните поле
+        </label>
+        <input type="text" placeholder="Ваш номер телефона"
+               [ngStyle]="{'border-color': modalForm.get('phone')?.invalid
+             && (modalForm.get('phone')?.dirty || modalForm.get('phone')?.touched) ? 'red' : ''}"
+               formControlName="phone">
+        <label *ngIf="modalForm.get('phone')?.invalid
+                  && (modalForm.get('phone')?.dirty || modalForm.get('phone')?.touched)">
+          Заполните поле
+        </label>
+        <button class="btn btn-big" (click)="makeRequest()">
+          Оставить заявку
+        </button>
+        <div class="popup-error" *ngIf="requestError">Произошла ошибка при отправке формы, попробуйте еще раз.</div>
+      </form>
+    </div>
+    <div class="popup-success-request" *ngIf="requestStatus">
+      <div class="popup-title">Спасибо за вашу заявку!</div>
+      <div class="popup-text">Мы свяжемся с вами при первой же возможности.</div>
+      <button class="btn btn-small" (click)="closePopup()">
+        Окей
+      </button>
+    </div>
+  </div>
+</ng-template>

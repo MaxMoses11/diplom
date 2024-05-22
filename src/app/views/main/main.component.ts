@@ -1,8 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {OwlOptions} from "ngx-owl-carousel-o";
 import {ServiceType} from "../../../types/service.type";
 import {ArticlesResponseType} from "../../../types/articles-response.type";
 import {ArticleService} from "../../shared/services/article.service";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {FormBuilder, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {RequestService} from "../../shared/services/request.service";
+import {RequestParamType} from "../../../types/request-param.type";
+import {RequestType} from "../../../types/request.type";
+import {DefaultResponseType} from "../../../types/default-response.type";
 
 @Component({
   selector: 'app-main',
@@ -10,6 +18,11 @@ import {ArticleService} from "../../shared/services/article.service";
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+
+  @ViewChild('popup') popup!: TemplateRef<ElementRef>;
+  dialogRef: MatDialogRef<any> | null = null;
+  requestStatus: boolean = false;
+  requestError: boolean = false;
 
   customOptions: OwlOptions = {
     loop: true,
@@ -81,9 +94,9 @@ export class MainComponent implements OnInit {
       image: "slider-item-img3.png"
     },
   ];
-
   servicesInfo: ServiceType[] = [
     {
+      id: 'dev',
       image: 'service-image1.png',
       service: 'Веб-разработка',
       title: 'Создание сайтов',
@@ -91,6 +104,7 @@ export class MainComponent implements OnInit {
       price: 'От 7 500₽',
     },
     {
+      id: 'smm',
       image: 'service-image2.png',
       service: 'Продвижение',
       title: 'Продвижение',
@@ -98,6 +112,7 @@ export class MainComponent implements OnInit {
       price: 'От 3 500₽',
     },
     {
+      id: 'add',
       image: 'service-image3.png',
       service: 'Реклама',
       title: 'Реклама',
@@ -105,6 +120,7 @@ export class MainComponent implements OnInit {
       price: 'От 1 000₽',
     },
     {
+      id: 'copy',
       image: 'service-image4.png',
       service: 'Копирайтинг',
       title: 'Копирайтинг',
@@ -112,7 +128,6 @@ export class MainComponent implements OnInit {
       price: 'От 750₽',
     },
   ];
-
   reviewsInfo = [
     {
       image: 'review-img1.png',
@@ -130,10 +145,20 @@ export class MainComponent implements OnInit {
       text: 'Команда АйтиШторма за такой короткий промежуток времени сделала невозможное: от простой фирмы по услуге продвижения выросла в мощный блог о важности личного бренда. Класс!'
     },
   ]
-
   articles: ArticlesResponseType[] = [];
 
-  constructor(private articleService: ArticleService) { }
+  modalForm = this.fb.group({
+    service: ['copy', Validators.required],
+    name: ['', Validators.required],
+    phone: ['', Validators.required]
+  });
+
+  constructor(private articleService: ArticleService,
+              private dialog: MatDialog,
+              private fb: FormBuilder,
+              private router: Router,
+              private _snackBar: MatSnackBar,
+              private requestService: RequestService) { }
 
   ngOnInit(): void {
     this.articleService.getPopularArticles()
@@ -142,4 +167,62 @@ export class MainComponent implements OnInit {
         });
   }
 
+  orderRequest(id: string) {
+    if (id) {
+      this.dialogRef = this.dialog.open(this.popup);
+      this.modalForm.get('service')?.setValue(id);
+      this.dialogRef.backdropClick()
+          .subscribe(() => {
+            this.requestStatus = false;
+          });
+    }
+  }
+
+  closePopup() {
+    this.dialogRef?.close();
+    this.requestStatus = false;
+    this.modalForm.markAsUntouched();
+  }
+
+  makeRequest() {
+    if (this.modalForm.valid) {
+      if (this.modalForm.value.name && this.modalForm.value.phone && this.modalForm.value.service) {
+        const reqParam: RequestParamType = {
+          name: this.modalForm.value.name,
+          phone: this.modalForm.value.phone,
+          service: this.modalForm.value.service,
+          type: RequestType.consultation
+        };
+
+        this.requestService.newRequest(reqParam)
+            .subscribe({
+              next: (data: DefaultResponseType) => {
+                if (data.error) {
+                  this._snackBar.open(data.message);
+                  this.requestError = true;
+                  throw new Error(data.message);
+                }
+
+                this.requestStatus = true;
+                this.requestError = false;
+                this.modalForm.get('name')?.setValue('');
+                this.modalForm.get('phone')?.setValue('');
+                this.modalForm.get('service')?.setValue('copy');
+                this.modalForm.markAsPristine();
+                this.modalForm.markAsUntouched();
+              },
+              error: errorResponse => {
+                if (errorResponse.error && errorResponse.error.message) {
+                  this._snackBar.open(errorResponse.error.message);
+                  this.requestError = true;
+                } else {
+                  this._snackBar.open('Ошибка сохранения');
+                }
+              }
+            });
+      }
+    } else {
+      this.modalForm.markAllAsTouched();
+    }
+  }
 }

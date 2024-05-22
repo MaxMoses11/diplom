@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ServiceType} from "../../../../types/service.type";
 
 @Component({
@@ -9,12 +9,14 @@ import {ServiceType} from "../../../../types/service.type";
 export class MainServicesItemComponent implements OnInit {
 
   @Input() service!: ServiceType;
+  @Output() orderRequest: EventEmitter<string> = new EventEmitter<string>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  order(service: string) {
-
+  order(id: string) {
+    this.orderRequest.emit(id);
   }
 }

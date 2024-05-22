@@ -65,6 +65,22 @@ html, body {
     .popup-form {
       display: flex;
       flex-direction: column;
+      width: 422px;
+
+      .popup-select {
+        border: 2px solid $light-blue-color;
+        border-radius: 3px;
+        padding: 17px 20px;
+        box-sizing: border-box;
+        background: #fff;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        color: $light-blue-color;
+        outline: none;
+        appearance: none;
+        margin-bottom: 5px;
+      }
 
       input {
         width: 100%;
@@ -83,6 +99,11 @@ html, body {
         width: 100%;
         margin-top: 15px;
         font-family: 'Montserrat', sans-serif;
+      }
+
+      .popup-error {
+        color: red;
+        margin-top: 5px;
       }
     }
   }

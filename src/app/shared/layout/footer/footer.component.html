@@ -95,6 +95,7 @@
         <button class="btn btn-big" (click)="makeRequest()">
           Заказать консультацию
         </button>
+        <div class="popup-error" *ngIf="requestError">Произошла ошибка при отправке формы, попробуйте еще раз.</div>
       </form>
     </div>
     <div class="popup-success-request" *ngIf="requestStatus">
