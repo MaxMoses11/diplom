@@ -4,6 +4,8 @@ import {CategoryResponseType} from "../../../../types/category-response.type";
 import {ArticlesWithPagesResponseType} from "../../../../types/articles-with-pages-response.type";
 import {ActiveParamsType} from "../../../../types/active-params.type";
 import {ActivatedRoute, Router} from "@angular/router";
+import {AppliedFilterType} from "../../../../types/applied-filter.type";
+import {debounceTime} from "rxjs";
 
 @Component({
   selector: 'app-blog',
@@ -12,9 +14,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class BlogComponent implements OnInit {
 
-  activeParams: ActiveParamsType = {types: []};
+  activeParams: ActiveParamsType = {categories: []};
+  appliedFilters: AppliedFilterType[] = [];
   articles: ArticlesWithPagesResponseType | null = null;
-  sortingOpen: boolean = false;
+  filterOpen: boolean = false;
   categories: CategoryResponseType[] = [];
   pages: number[] = [];
   constructor(private articleService: ArticleService,
@@ -26,40 +29,45 @@ export class BlogComponent implements OnInit {
       .subscribe({
         next: (data: CategoryResponseType[]) => {
           this.categories = data;
-        }
-      });
 
-    this.activatedRoute.queryParams
-      .subscribe(params => {
-        if (params.hasOwnProperty('page')) {
-          this.activeParams.page = +params['page'];
-        }
-
-        this.articleService.getArticles(this.activeParams)
-          .subscribe({
-            next: (data) => {
-              this.pages = [];
-              for (let i = 1; i <= data.pages; i++) {
-                this.pages.push(i);
+          this.activatedRoute.queryParams
+            .pipe(
+              debounceTime(500)
+            )
+            .subscribe(params => {
+              if (params.hasOwnProperty('page')) {
+                this.activeParams.page = +params['page'];
+              }
+              if (params.hasOwnProperty('categories')) {
+                this.activeParams.categories = Array.isArray(params['categories']) ? params['categories'] : [params['categories']];
               }
 
-              this.articles = data;
-              console.log(this.activeParams);
-            }
-          })
+              this.appliedFilters = [];
+              this.activeParams.categories.forEach(url => {
+                this.categories.forEach(category => {
+                  if (category.url === url) {
+                    this.appliedFilters.push({
+                      name: category.name,
+                      urlParam: category.url,
+                    });
+                  }
+                })
+              });
+
+              this.articleService.getArticles(this.activeParams)
+                .subscribe({
+                  next: (data) => {
+                    this.pages = [];
+                    for (let i = 1; i <= data.pages; i++) {
+                      this.pages.push(i);
+                    }
+
+                    this.articles = data;
+                  }
+                })
+            });
+        }
       });
-  }
-
-  toggleSorting() {
-    this.sortingOpen = !this.sortingOpen;
-  }
-
-  setFilter(url: string) {
-    this.categories.forEach(item => {
-      if (item.url === url) {
-        item.active = !item.active;
-      }
-    });
   }
 
   openPage(page: number) {
@@ -87,4 +95,50 @@ export class BlogComponent implements OnInit {
     }
   }
 
+  removeAppliedFilter(appliedFilter: AppliedFilterType) {
+    this.activeParams.categories = this.activeParams.categories.filter(category => category !== appliedFilter.urlParam);
+    this.categories.forEach(category => {
+      if (category.url === appliedFilter.urlParam) {
+        category.active = false;
+        this.appliedFilters = this.appliedFilters.filter(filter => filter.urlParam !== appliedFilter.urlParam);
+      }
+    });
+    this.activeParams.page = 1;
+    this.router.navigate(['/blog'], {queryParams: this.activeParams});
+  }
+
+  toggleFilter() {
+    this.filterOpen = !this.filterOpen;
+  }
+
+  updateFilter(url: string) {
+    this.categories.forEach(category => {
+      if (category.url === url) {
+        category.active = !category.active;
+
+        if (category.active) {
+          this.appliedFilters.push({
+            name: category.name,
+            urlParam: category.url
+          });
+          if (this.activeParams.categories && this.activeParams.categories.length > 0) {
+            const existingCategoryInParams = this.activeParams.categories.find(categoryInParams => categoryInParams === category.url);
+            if (existingCategoryInParams) {
+              this.activeParams.categories = this.activeParams.categories.filter(param => param !== category.url);
+            } else {
+              this.activeParams.categories = [...this.activeParams.categories, category.url];
+            }
+          } else {
+            this.activeParams.categories = [category.url];
+          }
+        } else {
+          this.appliedFilters = this.appliedFilters.filter(filter => filter.urlParam !== category.url);
+          this.activeParams.categories = this.activeParams.categories.filter(param => param !== category.url);
+        }
+      }
+    });
+
+    this.activeParams.page = 1;
+    this.router.navigate(['/blog'], {queryParams: this.activeParams});
+  }
 }
