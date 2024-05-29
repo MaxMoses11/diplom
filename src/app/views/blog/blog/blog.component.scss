@@ -29,20 +29,28 @@
         padding: 8px 20px;
         font-size: 16px;
         color: $light-blue-color;
+        height: 37px;
+        box-sizing: border-box;
 
         a {
           max-height: 17px;
+          cursor: pointer;
         }
       }
     }
 
     .blog-filter-button {
+      position: relative;
       border-radius: 5px;
+      width: 148px;
+      min-width: 148px;
 
       .blog-filter-button-head {
         display: flex;
         gap: 8px;
         align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
 
         span {
           width: 120px;
@@ -50,6 +58,66 @@
           color: $dark-blue-color;
         }
       }
+
+      .blog-filter-button-body {
+        position: absolute;
+        width: 100%;
+        box-sizing: border-box;
+        z-index: 3;
+        padding: 12px 23px;
+        background: #fff;
+        border-radius: 0 0 5px 5px;
+        color: #bEbEbE;
+
+        .blog-filter-button-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          cursor: pointer;
+          font-size: 16px;
+          color: #bebebe;
+
+          .blog-filter-button-item-icon {
+            font-size: 24px;
+          }
+
+          &.active {
+            color: $dark-blue-color;
+          }
+        }
+      }
+
+      &.open {
+        width: 257px;
+        min-width: 257px;
+
+        .blog-filter-button-head {
+          border-radius: 5px 5px 0 0;
+          padding: 12px 23px;
+          background: #b9d5fd;
+
+          svg {
+            rotate: 180deg;
+          }
+        }
+
+        .blog-filter-button-body {
+          border: 1px solid #b9d5fd;
+          border-radius: 0 0 5px 5px;
+          background: #fff;
+        }
+      }
+    }
+  }
+
+  .blog-articles {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 40px;
+    column-gap: 24px;
+
+    .blog-article {
+      width: 292px;
     }
   }
 
@@ -58,6 +126,7 @@
     align-items: center;
     justify-content: center;
     gap: 40px;
+    margin-top: 60px;
 
     .pagination-arrow {
       cursor: pointer;
