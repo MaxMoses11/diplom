@@ -1,6 +1,8 @@
-export type ArticlesResponseType = {
+import {CommentType} from "./comment.type";
+
+export type ArticleResponseType = {
   text?: string,
-  comments?: any,
+  comments?: CommentType[],
   commentsCount?: number,
   id: string,
   title: string,

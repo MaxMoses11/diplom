@@ -6,6 +6,11 @@
   justify-content: space-between;
   height: 100%;
 
+  &.related {
+    height: auto;
+    min-height: 571px;
+  }
+
   .article-info {
     margin-bottom: 20px;
 
@@ -50,5 +55,6 @@
     text-decoration: underline;
     text-decoration-skip-ink: none;
     color: $light-blue-color;
+    cursor: pointer;
   }
 }

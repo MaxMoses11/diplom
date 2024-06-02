@@ -1,0 +1,56 @@
+@import "../../../../assets/styles/variables";
+
+.comment {
+  .comment-head {
+    display: flex;
+    margin-bottom: 15px;
+
+    .comment-head-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 100%;
+      border: 3px solid $light-blue-color;
+      background: #b9d5fd;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin-right: 26px;
+    }
+
+    .comment-head-info {
+      .comment-head-info-name {
+        font-weight: 600;
+        font-size: 18px;
+        color: $light-blue-color;
+        margin-bottom: 10px;
+      }
+
+      .comment-head-info-date {
+        font-weight: 600;
+        font-size: 14px;
+        color: #bebebe;
+      }
+    }
+  }
+
+  .comment-text {
+    font-size: 14px;
+    line-height: 140%;
+    color: $dark-blue-color;
+    margin-bottom: 39px;
+  }
+
+  .comment-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .comment-action {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-weight: 600;
+      font-size: 14px;
+      color: $dark-blue-color;
+    }
+  }
+}

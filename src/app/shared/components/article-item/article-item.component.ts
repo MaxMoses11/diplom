@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ArticlesResponseType} from "../../../../types/articles-response.type";
+import {ArticleResponseType} from "../../../../types/article-response.type";
 import {Router} from "@angular/router";
 
 @Component({
@@ -9,7 +9,8 @@ import {Router} from "@angular/router";
 })
 export class ArticleItemComponent implements OnInit {
 
-  @Input() article!: ArticlesResponseType;
+  @Input() article!: ArticleResponseType;
+  @Input() related: boolean = false;
   pathToImage: string = '/assets/images/articles/';
   constructor(private router: Router) { }
 

@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {OwlOptions} from "ngx-owl-carousel-o";
 import {ServiceType} from "../../../types/service.type";
-import {ArticlesResponseType} from "../../../types/articles-response.type";
+import {ArticleResponseType} from "../../../types/article-response.type";
 import {ArticleService} from "../../shared/services/article.service";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, Validators} from "@angular/forms";
@@ -145,7 +145,7 @@ export class MainComponent implements OnInit {
       text: 'Команда АйтиШторма за такой короткий промежуток времени сделала невозможное: от простой фирмы по услуге продвижения выросла в мощный блог о важности личного бренда. Класс!'
     },
   ]
-  articles: ArticlesResponseType[] = [];
+  articles: ArticleResponseType[] = [];
 
   modalForm = this.fb.group({
     service: ['copy', Validators.required],
@@ -162,7 +162,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.articleService.getPopularArticles()
-      .subscribe((data: ArticlesResponseType[]) => {
+      .subscribe((data: ArticleResponseType[]) => {
           this.articles = data;
         });
   }

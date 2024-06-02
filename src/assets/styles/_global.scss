@@ -177,3 +177,25 @@ input {
 }
 
 //.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span
+
+.article-full-text {
+  h1, h3 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 130%;
+    color: $light-blue-color;
+  }
+
+  ol, ul, li, p {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: $dark-blue-color;
+  }
+
+  ol, ul {
+    padding-left: 15px;
+  }
+}
