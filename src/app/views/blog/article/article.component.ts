@@ -1,8 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ArticleService} from "../../../shared/services/article.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ArticleResponseType} from "../../../../types/article-response.type";
 import {AuthService} from "../../../core/auth/auth.service";
+import {FormBuilder, Validators} from "@angular/forms";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {CommentService} from "../../../shared/services/comment.service";
+import {DefaultResponseType} from "../../../../types/default-response.type";
+import {CommentType} from "../../../../types/comment.type";
+import {CommentResponseType} from "../../../../types/comment-response.type";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-article',
@@ -13,11 +20,22 @@ export class ArticleComponent implements OnInit {
 
   isLogged: boolean = false;
   article!: ArticleResponseType;
+  comments: CommentType[] = [];
+  appliedCommentCount: number = 0;
+  haveMoreComments: boolean = false;
   pathToImage: string = '/assets/images/articles/';
   relatedArticles: ArticleResponseType[] = [];
-  constructor(private activatedRoute: ActivatedRoute,
+
+  commentForm = this.fb.group({
+    comment: ['', Validators.required]
+  });
+  constructor(private fb: FormBuilder,
+              private activatedRoute: ActivatedRoute,
               private articleService: ArticleService,
-              private authService: AuthService,) {
+              private commentService: CommentService,
+              private _snackBar: MatSnackBar,
+              private authService: AuthService,
+              private router: Router) {
     this.isLogged = this.authService.getIsLogged();
   }
 
@@ -28,19 +46,69 @@ export class ArticleComponent implements OnInit {
 
     this.activatedRoute.params.subscribe(params => {
       this.articleService.getArticle(params['url'])
-        .subscribe(data => {
-          this.article = data;
+        .subscribe({
+            next: data => {
+                this.article = data;
+                this.comments = data.comments as CommentType[];
+                this.appliedCommentCount = 3;
 
-          this.articleService.getRelatedArticles(params['url'])
-            .subscribe(articles => {
-              this.relatedArticles = articles;
-            });
+                if (this.article.commentsCount && this.article.commentsCount > this.appliedCommentCount) {
+                    this.haveMoreComments = true;
+                }
+
+                this.articleService.getRelatedArticles(params['url'])
+                    .subscribe(articles => {
+                        this.relatedArticles = articles;
+                    });
+            },
+            error: (error: HttpErrorResponse) => {
+              this._snackBar.open('Произошла ошибка при загрузке статьи. Обратитесь в поддержку')
+              this.router.navigate(['/blog']);
+            }
         });
     });
   }
 
   addComment() {
-
+    if (this.commentForm.valid && this.commentForm.value.comment) {
+      this.commentService.addComment(this.commentForm.value.comment, this.article.id)
+        .subscribe({
+          next: (data: DefaultResponseType) => {
+            if (!data.error) {
+              this._snackBar.open('Комментарий успешно добавлен');
+              this.activatedRoute.params.subscribe(params => {
+                this.articleService.getArticle(params['url'])
+                  .subscribe(data => {
+                    this.comments = data.comments as CommentType[];
+                    this.appliedCommentCount = 3;
+                      if (this.article.commentsCount && this.article.commentsCount > this.appliedCommentCount) {
+                          this.haveMoreComments = true;
+                      }
+                  });
+              });
+              this.commentForm.get('comment')?.setValue('');
+            } else {
+              this._snackBar.open('Произошла ошибка при добавлении комментария, попробуйте позже.');
+            }
+          }
+        })
+    } else {
+      this._snackBar.open('Необходимо заполнить поле ввода');
+    }
   }
 
+  addCommentsToPage() {
+    const paramsObject = {
+      offset: this.appliedCommentCount,
+      article: this.article.id
+    }
+    this.commentService.getComments(paramsObject)
+      .subscribe({
+          next: (data: CommentResponseType) => {
+            data.comments.forEach(comment => this.comments = [...this.comments, comment]);
+            this.appliedCommentCount += 10;
+            this.haveMoreComments = !!(data.allCount && data.allCount > this.appliedCommentCount);
+          }
+      })
+  }
 }
