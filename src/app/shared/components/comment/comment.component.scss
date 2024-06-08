@@ -55,6 +55,16 @@
       svg {
         cursor: pointer;
       }
+
+      &.active {
+        color: $light-blue-color;
+
+        svg {
+          path {
+            stroke: $light-blue-color;
+          }
+        }
+      }
     }
   }
 }

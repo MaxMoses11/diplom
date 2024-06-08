@@ -4,6 +4,7 @@ import {MainCarouselItemComponent} from './components/main-carousel-item/main-ca
 import { MainServicesItemComponent } from './components/main-services-item/main-services-item.component';
 import { ArticleItemComponent } from './components/article-item/article-item.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { CommentComponent } from './components/comment/comment.component';
         MainServicesItemComponent,
         ArticleItemComponent,
         CommentComponent,
+        LoaderComponent,
     ],
     imports: [
         CommonModule
@@ -21,6 +23,7 @@ import { CommentComponent } from './components/comment/comment.component';
         MainServicesItemComponent,
         ArticleItemComponent,
         CommentComponent,
+        LoaderComponent,
     ]
 })
 export class SharedModule {

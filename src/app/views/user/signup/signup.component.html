@@ -36,7 +36,7 @@
         <div class="auth-checkbox">
           <div class="auth-checkbox-input">
             <input type="checkbox" id="remember" formControlName="agree">
-            <label for="remember">Я принимаю <a href="#">условия пользовательского соглашения</a> и даю <a href="#">согласие на обработку персональных данных</a>.</label>
+            <label for="remember">Я принимаю <a routerLink="/policy" fragment="agreement">условия пользовательского соглашения</a> и даю <a routerLink="/policy" fragment="data">согласие на обработку персональных данных</a>.</label>
           </div>
           <div *ngIf="signupForm.get('agree')?.invalid
                   && (signupForm.get('agree')?.dirty || signupForm.get('agree')?.touched)"

@@ -140,16 +140,20 @@
           flex-direction: column;
           gap: 40px;
           margin-top: 60px;
+        }
 
-          .article-comments-added {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 20px;
-            font-weight: 500;
-            font-size: 20px;
-            color: $light-blue-color;
-            cursor: pointer;
+        .article-comments-added {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-top: 60px;
+          font-weight: 500;
+          font-size: 20px;
+          color: $light-blue-color;
+          cursor: pointer;
+
+          &.hide {
+            display: none;
           }
         }
       }

@@ -16,6 +16,7 @@ import {AuthInterceptor} from "./core/auth/auth.interceptor";
 import {CarouselModule} from "ngx-owl-carousel-o";
 import {SharedModule} from "./shared/shared.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import { PolicyComponent } from './views/policy/policy.component';
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import {ReactiveFormsModule} from "@angular/forms";
         HeaderComponent,
         FooterComponent,
         MainComponent,
+        PolicyComponent,
     ],
     imports: [
         BrowserModule,
