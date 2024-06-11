@@ -80,18 +80,21 @@ export class MainComponent implements OnInit {
       promo: "Акция",
       title: "Нужен грамотный <span class='blue-text'>копирайтер</span>?",
       text: "Весь декабрь у нас действует акция на работу копирайтера.",
-      image: "slider-item-img2.png"
+      image: "slider-item-img2.png",
+      id: 'copy'
     },
     {
       promo: "Предложение месяца",
       title: "Продвижение в<br> Instagram для вашего бизнеса <span class='blue-text'>-15%</span>!",
-      image: "slider-item-img1.png"
+      image: "slider-item-img1.png",
+      id: 'smm'
     },
     {
       promo: "Новость дня",
       title: "<span class='blue-text'>6 место</span> в ТОП-10<br> SMM-агенств Москвы!",
       text: "Мы благодарим каждого, кто голосовал за нас!",
-      image: "slider-item-img3.png"
+      image: "slider-item-img3.png",
+      id: 'smm'
     },
   ];
   servicesInfo: ServiceType[] = [

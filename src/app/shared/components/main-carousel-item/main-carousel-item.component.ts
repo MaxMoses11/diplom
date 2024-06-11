@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-main-carousel-item',
@@ -7,10 +7,14 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class MainCarouselItemComponent implements OnInit {
 
-  @Input() item!: {promo: string, title: string, text?:string, image: string};
+  @Input() item!: {promo: string, title: string, text?:string, image: string, id: string};
+  @Output() orderRequest: EventEmitter<string> = new EventEmitter<string>();
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  order(id: string) {
+    this.orderRequest.emit(id);
+  }
 }

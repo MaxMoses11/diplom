@@ -3,7 +3,7 @@
     <div class="carousel">
       <owl-carousel-o [options]="customOptions" #owlCar class="carousel-items">
         <ng-template carouselSlide *ngFor="let item of sliderInfoItems">
-          <app-main-carousel-item [item]="item"></app-main-carousel-item>
+          <app-main-carousel-item [item]="item" (orderRequest)="orderRequest($event)"></app-main-carousel-item>
         </ng-template>
       </owl-carousel-o>
       <div class="carousel-arrow arrow-prev" (click)="owlCar.prev()">

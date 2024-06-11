@@ -6,7 +6,7 @@
            {{item.text}}
         </div>
         <div class="carousel-item-info-action" [ngStyle]="{'margin-top': item.text ? '50px' : '40px'}">
-            <button class="btn btn-big">Подробнее</button>
+            <button class="btn btn-big" (click)="order(item.id)">Подробнее</button>
         </div>
     </div>
     <div class="carousel-item-image">

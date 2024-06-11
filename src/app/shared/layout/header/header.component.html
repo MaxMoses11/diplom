@@ -49,8 +49,8 @@
         <div class="user-text">Привет, {{userName}}</div>
       </div>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <span (click)="logout()">Выйти</span>
+        <button mat-menu-item (click)="logout()">
+          <span>Выйти</span>
         </button>
       </mat-menu>
     </div>
